@@ -18,7 +18,7 @@ function notMatching {
     $pdonArray = @()
     $depArray = @()
     $companyArray = @()
-    $computers2 = Get-ADComputer -Filter * -Properties managedBy, Company, Department, PhysicalDeliveryOfficeName -SearchBase "OU=$computerOu,DC=adm,DC=ovansiljan,DC=net"
+    $computers2 = Get-ADComputer -Filter * -Properties managedBy, Company, Department, PhysicalDeliveryOfficeName -SearchBase "OU=$computerOu,DC=Your dc here"
     
     Foreach($computer2 in $computers2){
         If($null -ne $computer2.ManagedBy){
