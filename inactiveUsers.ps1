@@ -14,7 +14,7 @@ function inactiveUsers {
 
     $results = @()
 
-    $OUPath = "OU=$computerOu,DC=adm,DC=ovansiljan,DC=net"
+    $OUPath = "OU=$computerOu,[DC's HERE]"
     $computers = Get-ADComputer -Filter * -Properties managedBy -SearchBase $OUPath
     $userArray = @()
     $inactiveUserArray = @()
