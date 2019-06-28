@@ -13,19 +13,19 @@ If($resultsPath -notcontains ".csv"){
 }
 
 ForEach($ou in $ous){
-        $ouName = $ou.name
-        $ouUsers = Get-ADUser -Filter * -SearchBase $ou
-        $ouComputers = Get-ADComputer -Filter * -SearchBase $ou
+        $ouName = $ou.distinguishedname
+
+        $obj = Get-ADObject -Filter * -SearchBase $ou
         $subOus = Get-ADOrganizationalUnit -Filter * -SearchBase $ou
-        $ouGroups = Get-ADGroup -Filter * -SearchBase $ou
 
-        [Int32[]]$usrCount = $ouUsers.count
-        [Int32[]]$groupCount = $ouGroups.count
         [Int32[]]$subOuCount = $subOus.count
-        [Int32[]]$comCount = $ouComputers.count
+        [Int32[]]$objCount = $obj.count
+        
+        If($subOuCount -ne 0) {
+                continue
+        }
 
-        $count = ($usrCount + $comCount + $groupCount + $subOuCount)
-        If($count -lt 10) {
+        If($objcount -eq 0) {
                 $details = @{
                     Objects   = $count
                     OuName    = $ouName
